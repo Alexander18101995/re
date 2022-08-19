@@ -42,7 +42,6 @@ with open("phonebook_raw.csv") as f:
   n_c_l = result_6
   new_contacts_list = []
   new_contacts_list.append(n_c_l)
-  print(type(new_contacts_list))
   with open("phonebook.csv", "w") as f:
       datawriter = csv.writer(f,delimiter=",")
       datawriter.writerow(new_contacts_list)
