@@ -23,26 +23,23 @@ with open("phonebook_raw.csv") as f:
   contacts_list[7][3] = contacts_list[6][3]
   contacts_list[7][5] = contacts_list[6][5]
   del contacts_list[6]
-  res = ''.join(str(contacts_list))
-  pattern = r"(\+7)\s\((\d+)\)\s*(\d+)-(\d+)-(\d+)"
-  pattern_2 = r"(\+7)(\d{3})(\d{3})(\d{2})(\d{2})"
-  pattern_3 = r"(8)\((\d+)\)(\d+)-(\d+)-(\d+)"
-  pattern_4 = r"(8)\s(\d+)-(\d+)-(\d{2})(\d+)"
-  r_p = r"+7(\2)\3-\4-\5"
-  result = re.sub(pattern,r_p,res)
-  result_2 = re.sub(pattern_2,r_p,result)
-  result_3 = re.sub(pattern_3,r_p,result_2)
-  result_4 = re.sub(pattern_4,r_p,result_3)
-  pattern_5 = r"(\+7)\((\d+)\)(\d+)-(\d+)-(\d+)\s\((\w+.)\s(\w+)\)"
-  r_p_2 = r"+7(\2)\3-\4-\5 \6\7"
-  result_5 = re.sub(pattern_5,r_p_2,result_4)
-  pattern_6 = r"(\+7)\((\d+)\)(\d+)-(\d+)-(\d+)\s(\w+.)\s(\d+)"
-  r_p_2 = r"+7(\2)\3-\4-\5 \6\7"
-  result_6 = re.sub(pattern_6,r_p_2,result_5)
-  n_c_l = result_6
-  new_contacts_list = []
-  new_contacts_list.append(n_c_l)
   with open("phonebook.csv", "w") as f:
-      datawriter = csv.writer(f,delimiter=",")
-      datawriter.writerow(new_contacts_list)
-
+    for cl in contacts_list:
+      res = ','.join(cl)
+      pattern = r"(\+7)\s\((\d+)\)\s*(\d+)-(\d+)-(\d+)"
+      pattern_2 = r"(\+7)(\d{3})(\d{3})(\d{2})(\d{2})"
+      pattern_3 = r"(8)\((\d+)\)(\d+)-(\d+)-(\d+)"
+      pattern_4 = r"(8)\s(\d+)-(\d+)-(\d{2})(\d+)"
+      r_p = r"+7(\2)\3-\4-\5"
+      result = re.sub(pattern,r_p,res)
+      result_2 = re.sub(pattern_2,r_p,result)
+      result_3 = re.sub(pattern_3,r_p,result_2)
+      result_4 = re.sub(pattern_4,r_p,result_3)
+      pattern_5 = r"(\+7)\((\d+)\)(\d+)-(\d+)-(\d+)\s\((\w+.)\s(\w+)\)"
+      r_p_2 = r"+7(\2)\3-\4-\5 \6\7"
+      result_5 = re.sub(pattern_5,r_p_2,result_4)
+      pattern_6 = r"(\+7)\((\d+)\)(\d+)-(\d+)-(\d+)\s(\w+.)\s(\d+)"
+      r_p_2 = r"+7(\2)\3-\4-\5 \6\7"
+      result_6 = re.sub(pattern_6,r_p_2,result_5)
+      new_contacts_list = result_6
+      datawriter = f.write(new_contacts_list)
